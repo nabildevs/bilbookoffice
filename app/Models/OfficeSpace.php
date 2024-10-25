@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OfficeSpace extends Model
 {
-    //
+    protected $guarded = [
+        'id'
+    ];
 }
