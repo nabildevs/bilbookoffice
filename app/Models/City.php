@@ -24,7 +24,7 @@ class City extends Model
     }
 
     // Relations
-    public function office(): HasMany
+    public function offices(): HasMany
     {
         return $this->hasMany(OfficeSpace::class);
     }
