@@ -39,7 +39,11 @@ class CityResource extends Resource
     {
         return $table
             ->columns([
-                //
+                // Fetch cities data
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+
+                Tables\Columns\ImageColumn::make('photo'),
             ])
             ->filters([
                 //
