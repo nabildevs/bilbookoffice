@@ -114,7 +114,7 @@ class OfficeSpaceResource extends Resource
                 Tables\Columns\IconColumn::make('is_full_booked')
                     ->boolean()
                     ->trueColor('danger')
-                    ->falseColor('success')
+                    ->falseColor('primary')
                     ->trueIcon('heroicon-o-x-circle')
                     ->falseIcon('heroicon-o-check-circle')
                     ->label('Available')
