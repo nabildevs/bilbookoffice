@@ -114,7 +114,7 @@ class OfficeSpaceResource extends Resource
     {
         return $table
             ->columns([
-                // Fetch cities data
+                // Fetch office space data
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
 
