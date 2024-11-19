@@ -51,8 +51,11 @@ class CityResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label(''),
-                Tables\Actions\ViewAction::make()->label('')
+                Tables\Actions\EditAction::make()
+                    ->label('')
+                    ->color('gray'),
+                Tables\Actions\ViewAction::make()
+                    ->label('')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
