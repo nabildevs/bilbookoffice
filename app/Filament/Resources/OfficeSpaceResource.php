@@ -27,75 +27,86 @@ class OfficeSpaceResource extends Resource
         return $form
             ->schema([
                 // Form Inputs
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\FileUpload::make('thumbnail')
-                    ->image()
-                    ->required(),
-
-                Forms\Components\RichEditor::make('about')
-                    ->required()
-                    ->toolbarButtons([
-                        'bold',
-                        'italic',
-                        'underline',
-                        'strike',
-                        'link',
-                        'orderedList',
-                        'unorderedList',
-                        'blockquote',
-                        'codeBlock',
-                    ]),
-
-                Forms\Components\Repeater::make('photos')
-                    ->relationship('photos')
-                    ->schema([
-                        Forms\Components\FileUpload::make('photo')
-                            ->required()
-                    ]),
-
-                Forms\Components\Repeater::make('benefits')
-                    ->relationship('benefits')
+                Forms\Components\Section::make('Office Space Details')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('address')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\RichEditor::make('about')
+                            ->required()
+                            ->toolbarButtons([
+                                'bold',
+                                'italic',
+                                'underline',
+                                'strike',
+                                'link',
+                                'orderedList',
+                                'unorderedList',
+                                'blockquote',
+                                'codeBlock',
+                            ])
+                            ->columnSpanFull(),
+
+                        Forms\Components\Repeater::make('benefits')
+                            ->relationship('benefits')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->label('Benefit'),
+                            ]),
+
+                        Forms\Components\Select::make('city_id')
+                            ->relationship('city', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+
+                        Forms\Components\TextInput::make('price')
+                            ->required()
+                            ->numeric()
+                            ->prefix('IDR'),
+
+                        Forms\Components\TextInput::make('duration')
+                            ->required()
+                            ->numeric()
+                            ->prefix('Days'),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Office Space Images')
+                    ->schema([
+                        Forms\Components\FileUpload::make('thumbnail')
+                            ->image()
+                            ->required(),
+
+                        Forms\Components\Repeater::make('photos')
+                            ->relationship('photos')
+                            ->schema([
+                                Forms\Components\FileUpload::make('photo')
+                                    ->required()
+                            ]),
                     ]),
 
-                Forms\Components\Select::make('city_id')
-                    ->relationship('city', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                Forms\Components\Section::make('Office Space Status')
+                    ->schema([
+                        Forms\Components\Select::make('is_open')
+                            ->options([
+                                true  => 'Open',
+                                false => 'Not Open'
+                            ])
+                            ->required(),
 
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('IDR'),
-
-                Forms\Components\TextInput::make('duration')
-                    ->required()
-                    ->numeric()
-                    ->prefix('Days'),
-
-                Forms\Components\Select::make('is_open')
-                    ->options([
-                        true  => 'Open',
-                        false => 'Not Open'
-                    ])
-                    ->required(),
-
-                Forms\Components\Select::make('is_full_booked')
-                    ->options([
-                        true  => 'Not Available',
-                        false => 'Available'
-                    ])
-                    ->required(),
+                        Forms\Components\Select::make('is_full_booked')
+                            ->options([
+                                true  => 'Not Available',
+                                false => 'Available'
+                            ])
+                            ->required(),
+                    ])->columns(2),
             ]);
     }
 
