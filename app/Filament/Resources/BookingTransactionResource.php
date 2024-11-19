@@ -115,8 +115,8 @@ class BookingTransactionResource extends Resource
                     ->label('Payment Status'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\ViewAction::make()
+                Tables\Actions\EditAction::make()->label(''),
+                Tables\Actions\ViewAction::make()->label('')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
