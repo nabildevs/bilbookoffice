@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class ApiKey extends Model
 {
@@ -17,10 +18,8 @@ class ApiKey extends Model
     // Generate api key
     public static function generateApiKey()
     {
-        $prefix = 'API';
-
         do {
-            $randString = $prefix . mt_rand(100000, 999999);
+            $randString = Str::random(32);
         } while (self::where('key', $randString)->exists());
 
         return $randString;
