@@ -20,9 +20,21 @@ class ApiKey extends Model
         $prefix = 'API';
 
         do {
-            $randString = $prefix . mt_rand(1000000, 999999);
+            $randString = $prefix . mt_rand(100000, 999999);
         } while (self::where('key', $randString)->exists());
 
         return $randString;
+    }
+
+    // Store api key
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->key)) {
+                $model->key = self::generateApiKey();
+            }
+        });
     }
 }

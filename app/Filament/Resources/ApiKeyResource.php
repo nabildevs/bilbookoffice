@@ -44,7 +44,9 @@ class ApiKeyResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('')
+                    ->color('gray')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
