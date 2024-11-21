@@ -14,6 +14,17 @@ class OfficeSpaceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id'    => $this->id,
+            'name'  => $this->name,
+            'slug'  => $this->slug,
+            'price' => $this->price,
+            'about' => $this->about,
+            'duration'  => $this->duration,
+            'thumbnail' => $this->thumbnail,
+            'city'   => new CityResource($this->whenLoaded('city')),
+            'photos' => OfficeSpacePhotoResource::collection($this->whenLoaded('photos')),
+            'benefits' => OfficeSpaceBenefitResource::collection($this->whenLoaded('benefits'))
+        ];
     }
 }
